@@ -4,20 +4,21 @@
  * @date: 2019-04-10 10:02:24 
  */
 
-var http = require('http');
-var path = require('path');
-var fs = require('fs');
+const http = require('http');
+const path = require('path');
+const fs = require('fs');
 
 // 参数配置
-var host = '127.0.0.1'; // 设置主机名
-var port = 8080;        // 设置端口
-var openPage = '/demo/demo.html';   // 默认打开的页面
-var rootPath = path.resolve(__dirname, './'); // 文件的访问路径
+const host = '127.0.0.1';   // 设置主机名
+const port = 8080;          // 设置端口
+const openPage = '/demo/demo.html';             // 默认打开的页面
+const rootPath = path.resolve(__dirname, './'); // 文件的访问路径
 
 // 创建服务
-var server = http.createServer(function (req, res) {
-    var url = req.url === '/' ? openPage : req.url;  // 客户端输入的url，如：输入 localhost:8080/index.html，那么 url = '/index.html'
-    var file = rootPath + url;  // 访问的文件路径
+const server = http.createServer(function (req, res) {
+    // const url = req.url === '/' ? openPage : req.url;  // 客户端输入的url，如：输入 localhost:8080/index.html，那么 url = '/index.html'
+    const url = req.url;  // 客户端输入的url，如：输入 localhost:8080/index.html，那么 url = '/index.html'
+    const file = rootPath + url;  // 访问的文件路径
     // console.log(file);
 
     fs.readFile(file, function (err, data) {

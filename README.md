@@ -54,11 +54,20 @@
 npm i sg-utils -S
 ```
 
-#### 4、文件说明
+#### 4、github地址
+
+> [sg-utils项目源码地址，点击跳转](https://github.com/shiguang0116/sg-utils)
+
+#### 5、文件说明
+
 ```
-- demo.html     util.js用法实例文档
-- demo.js       util.js方法引用，可编辑代码，然后在demo.html控制台输出结果
-- util.js       通用工具类。引入该文件即可使用变量_util，及所有方法
-- service.js    服务工具类的基本架构，可复制到自己项目中以便参考扩展
-- filter.js     过滤器（基于art-template模板）
+sg-utils/
+├── demo/
+│   ├── demo.html       util.js用法实例文档
+│   └── demo.js         util.js的方法调用，可编辑代码，然后在demo.html控制台查看输出结果
+├── src/
+│   ├── util.js         通用工具类，引入该文件即可使用变量_util，及所有方法。建议复制到项目中以便扩展；
+│   ├── service.js      服务工具类的基本架构。可复制到项目中以便参考扩展；
+│   └── filter.js       过滤器（基于art-template模板）。可复制到项目中以便参考扩展；
+└── index.js            项目引用文件
 ```
