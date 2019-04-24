@@ -712,8 +712,10 @@ console.groupEnd();
 /**
  *  _util.url.getParams()
  */
-console.log(_util.url.getParams());      // { id: 'a', billNo: 'abc100' }
-console.log(_util.url.getParams('id'));  // 'a'
+console.group("_util.url.getParams()");
+    console.log(_util.url.getParams());      // { id: 'a', billNo: 'abc100' }
+    console.log(_util.url.getParams('id'));  // 'a'
+console.groupEnd();
 
 /**
  *  _util.url.jump()
@@ -737,5 +739,34 @@ var param = {
 /********************************************* validate 验证 ***************************************************/
 
 var input = '12.345';
-console.log(_util.validate.positiveToFixed(input, 2));  // false
-console.log(_util.validate.positiveToFixed(input, 3));  // true
+console.group("_util.validate.positiveToFixed()");
+    console.log(_util.validate.positiveToFixed(input, 2));  // false
+    console.log(_util.validate.positiveToFixed(input, 3));  // true
+console.groupEnd();
+
+/********************************************* request 请求 ***************************************************/
+
+console.group("_sv.request()");
+    _sv.request('./demo.json').then(function(res){
+        if(res.status === 'SUCCESS'){
+            console.log(res.data.rows);
+        }
+        else if(res.status === 'WARN') {
+            
+        }
+    }).catch(function(err){
+        console.log(err);
+    }).finally(function(){
+        console.log('finally');
+    });
+
+    async function getJson() {
+        const demo = await _sv.request('./demo.json');
+        const demo2 = await _sv.request('./demo2.json', demo);
+        return demo2;
+    }
+
+    getJson().then(function (res) {
+        console.log(res.data.rows);
+    });
+console.groupEnd();

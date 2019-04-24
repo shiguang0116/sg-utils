@@ -1,0 +1,61 @@
+{
+    "data": {
+        "order_fields": [{
+            "fieldName": "CODE",
+            "order": "ASC"
+        }],
+        "rows": [{
+            "auditingDate2": null,
+            "brandDetailItems": null,
+            "brandId": 24,
+            "code": "2019040101",
+            "controller": "0",
+            "createBy": "admin1",
+            "createChannelId": 1,
+            "createTime": "2019-04-01 16:58:16",
+            "disableBy": null,
+            "disableDate": null,
+            "enableBy": "admin1",
+            "enableDate": "2019-04-01 16:59:00",
+            "fromDB": true,
+            "isDefault": "0",
+            "lastChangeDate": "2019-04-01 17:18:58",
+            "modifyBy": "admin1",
+            "modifyTime": "2019-04-01 17:27:11",
+            "name": "品牌A（分配）",
+            "recordFlag": 0,
+            "status": "1"
+        }, {
+            "auditingDate2": null,
+            "brandDetailItems": null,
+            "brandId": 25,
+            "code": "2019040102",
+            "controller": "1",
+            "createBy": "admin1",
+            "createChannelId": 1,
+            "createTime": "2019-04-01 16:58:50",
+            "disableBy": null,
+            "disableDate": null,
+            "enableBy": "admin1",
+            "enableDate": "2019-04-01 17:09:51",
+            "fromDB": true,
+            "isDefault": "0",
+            "lastChangeDate": "2019-04-01 17:01:38",
+            "modifyBy": null,
+            "modifyTime": null,
+            "name": "品牌B（共享）",
+            "recordFlag": 0,
+            "status": "1"
+        }],
+        "page_data": {
+            "num": 15,
+            "count": 27,
+            "pageNum": 0,
+            "countPage": 2
+        },
+        "filter_fields": []
+    },
+    "errorTips": null,
+    "status": "SUCCESS",
+    "total": null
+}

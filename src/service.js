@@ -48,35 +48,43 @@
     s.api = {};
 
     /**
-     * @description 异步请求（以 jQuery 为例）
-     * @param {Object} param 请求参数
+     * @description 异步请求，这里使用了es6的promise对象（以 jQuery 为例）
+     * @param {String} url 请求路径
+     * @param {Object} data 请求数据
+     * @param {Object} option 其他请求参数及处理参数等 (method/type/ignoreLoading/ignoreError)
      */
-    s.ajax = function(param){
-        $.ajax({
-            type : param.method || 'POST',
-            url : param.url || '',
-            dataType : param.type || 'json',
-            data : param.data || '',
-            success : function(res){
-                var data = res.data || '';
-                var msg = res.message || '';
-                if(res.status === 'SUCCESS'){
-                    typeof param.success === 'function' && param.success(data, msg);
-                }
-                else if(res.status === 'ERROR'){
-                    if(typeof param.error === 'function'){
-                        return param.error(msg);
+    s.request = function(url, data, option){
+        url = s.api.getPath(url);
+        data = data || {};
+        option = option || {};
+        // 是否忽略加载动画
+        if(option.ignoreLoading !== true){
+            console.log('数据加载中...');
+        }
+        // 发送请求并返回promise对象
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                url : url,
+                data : data,
+                type : option.type || 'POST',
+                dataType : option.dataType || 'json',
+                success : function(res){
+                    if(option.ignoreError !== true && res.status === 'FAIL'){   // 请求数据失败的处理
+                        var msg = res.MESSAGE || '数据异常';
+                        s.errorTip(msg);
                     }
-                    return s.errorTip(msg);
+                    resolve(res);   // 成功回调
+                },
+                error : function(err){
+                    s.errorTip('网络访问失败：' + err.statusText);  // 请求失败的错误处理
+                    reject(new Error(err.statusText));  // 失败回调
+                },
+                complete : function(res){
+                    if(option.ignoreLoading !== true){
+                        console.log('数据加载完毕');
+                    }
                 }
-            },
-            error : function(err){
-                var msg = (err && err.statusText) ? err.statusText : '请求错误';
-                if(typeof param.error === 'function'){
-                    return param.error(msg);
-                }
-                return s.errorTip(msg);
-            }
+            });
         });
     };
 
@@ -84,8 +92,9 @@
      * @description 获取URL请求的地址
      * @param {String} name 
      */
-    s.api.url = function(name){
-        // return
+    s.api.getPath = function(url){
+        return url;
+        // return 'http://192.168.149.223:9020/api' + url;
     };
 
     /**
@@ -116,9 +125,10 @@
     /**
      * @description 初始用户信息
      * @param {Object} user 
+     * @param {Boolean} rememberPwd 是否记住密码
      */
-    s.user.init = function (user) {
-        var expireDays = 0.25; // cookie过期时间 默认6小时；如果记住密码，则7天
+    s.user.init = function (user, rememberPwd) {
+        var expireDays = rememberPwd ? 7 : 0.25; // cookie过期时间 默认6小时；如果记住密码，则7天
 
         _util.cookie.set('user_id', user.userId, expireDays);
         _util.cookie.set('user_name', user.userName, expireDays);
@@ -128,12 +138,10 @@
     /**
      * 用户登入
      */
-    s.user.login = function (data) {
-        s.ajax({
-            url: 'service/userService/checkToken',
-            data: data,
-            success: function(res){
-                s.user.init(res.data.user);
+    s.user.login = function (param) {
+        s.request('service/userService/login', param).then(function(res){
+            if(res.status === 'SUCCESS') {
+                s.user.init(res.data.user, param.rememberPwd);
             }
         });
     };
@@ -142,9 +150,8 @@
      * 用户登出
      */
     s.user.logout = function () {
-        s.ajax({
-            url: 'service/userService/logout',
-            success: function(res){
+        s.request('service/userService/logout').then(function(res){
+            if(res.status === 'SUCCESS') {
                 // 清空本地存储
                 _util.cookie.remove('user_id');
                 _util.cookie.remove('user_name');
@@ -158,7 +165,7 @@
      * 判断用户是否登陆
      */
     s.user.isLogin = function () {
-        return _util.cookie.get('is_login') == 1;
+        return _util.cookie.get('is_login') === '1';
     };
 
     /********************************************* menu 菜单 ***************************************************/
