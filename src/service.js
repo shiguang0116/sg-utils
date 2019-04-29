@@ -8,6 +8,20 @@
 (function (window) {
     var s = {}; 
 
+    /********************************************* config 配置 ***************************************************/
+
+    s.config = {
+        // api路径
+        api_path : ''
+        // api_path : {
+        //     "web": "http://192.168.149.192:7096/web/",
+        //     "admin": "http://192.168.149.192:7094/admin/",
+        //     "img_upload": "http://192.168.149.192:7096/web/service/fileService/uploadFile",
+        //     "img_path": "http://192.168.149.36:9527/dev1.0.5/image/",
+        // },
+
+    };
+
     /********************************************* 统一处理 ***************************************************/
 
     /**
@@ -49,12 +63,12 @@
 
     /**
      * @description 异步请求，这里使用了es6的promise对象（以 jQuery 为例）
-     * @param {String} url 请求路径
+     * @param {String} apiName 请求路径名
      * @param {Object} data 请求数据
      * @param {Object} option 其他请求参数及处理参数等 (method/type/ignoreLoading/ignoreError)
      */
-    s.request = function(url, data, option){
-        url = s.api.getPath(url);
+    s.request = function(apiName, data, option){
+        url = s.api.getPath(apiName);
         data = data || {};
         option = option || {};
         // 是否忽略加载动画
@@ -90,11 +104,11 @@
 
     /**
      * @description 获取URL请求的地址
-     * @param {String} name 
+     * @param {String} apiName 接口名
+     * @param {String} moduleType 接口所属模块 
      */
-    s.api.getPath = function(url){
-        return url;
-        // return 'http://192.168.149.223:9020/api' + url;
+    s.api.getPath = function(apiName){
+        return  s.config.api_path + apiName;
     };
 
     /**
@@ -124,7 +138,7 @@
 
     /**
      * @description 初始用户信息
-     * @param {Object} user 
+     * @param {Object} user 用户数据
      * @param {Boolean} rememberPwd 是否记住密码
      */
     s.user.init = function (user, rememberPwd) {
