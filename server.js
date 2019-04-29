@@ -16,10 +16,8 @@ const rootPath = path.resolve(__dirname, './'); // 文件的访问路径
 
 // 创建服务
 const server = http.createServer(function (req, res) {
-    // const url = req.url === '/' ? openPage : req.url;  // 客户端输入的url，如：输入 localhost:8080/index.html，那么 url = '/index.html'
-    const url = req.url;  // 客户端输入的url，如：输入 localhost:8080/index.html，那么 url = '/index.html'
-    const file = rootPath + url;  // 访问的文件路径
-    // console.log(file);
+    const url = req.url;            // 客户端输入的url，如：输入 localhost:8080/index.html，那么 url = '/index.html'
+    const file = rootPath + url;    // 访问的文件路径
 
     fs.readFile(file, function (err, data) {
         if (err) {
@@ -38,7 +36,7 @@ const server = http.createServer(function (req, res) {
     });
 });
 
-// 输入命令 node server.js 启动服务
+// 输入命令 node server 启动服务
 server.listen(port, host, function(){
-    console.log(`服务器运行在 http://${host}:${port}`);
+    console.log('\x1B[36m%s\x1B[39m', `服务器运行在: \n - http://${host}:${port} \n - http://${host}:${port}${openPage}`);
 });
