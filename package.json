@@ -1,10 +1,15 @@
 {
   "name": "sg-utils",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "javascript通用工具类",
   "main": "index.js",
+  "files": [
+    "src",
+    "demo",
+    "index.js"
+  ],
   "scripts": {
-    "stop": "taskkill /f /t /im node.exe"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

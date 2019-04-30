@@ -3,7 +3,7 @@
  * @author: guang.shi <https://blog.csdn.net/guang_s> 
  * @date: 2019-04-10 10:02:24 
  * 
- * 启动服务:  node server
+ * 启动服务:  node server.js
  */
 
 const http = require('http');

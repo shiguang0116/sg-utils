@@ -68,7 +68,7 @@
      * @param {Object} option 其他请求参数及处理参数等 (method/type/ignoreLoading/ignoreError)
      */
     s.request = function(apiName, data, option){
-        url = s.api.getPath(apiName);
+        var url = s.api.getPath(apiName);
         data = data || {};
         option = option || {};
         // 是否忽略加载动画

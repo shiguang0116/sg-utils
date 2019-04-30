@@ -1,3 +1,9 @@
+/**
+ * @description: eslint代码检查规则
+ * @author: guang.shi <https://blog.csdn.net/guang_s> 
+ * @date: 2019-04-30 15:32:46 
+ */
+
 module.exports = {
   root: true,
   parserOptions: {
@@ -11,8 +17,7 @@ module.exports = {
   },
   extends: ['plugin:vue/recommended', 'eslint:recommended'],
 
-  // add your custom rules here
-  //it is base on https://github.com/vuejs/eslint-config-vue
+  // 在此处添加自定义规则，此规则基于 https://github.com/vuejs/eslint-config-vue
   rules: {
     "vue/max-attributes-per-line": [2, {
       "singleline": 10,
@@ -195,4 +200,4 @@ module.exports = {
     }],
     'array-bracket-spacing': [2, 'never']
   }
-}
+};

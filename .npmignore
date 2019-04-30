@@ -1,9 +1,0 @@
-.DS_Store
-
-/dist
-/node_modules
-.gitignore
-server.js
-npm-debug.log
-
-*.zip

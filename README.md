@@ -56,7 +56,7 @@ npm i sg-utils -S
 
 #### 4、github地址
 
-> [sg-utils项目源码地址，点击跳转](https://github.com/shiguang0116/sg-utils)
+> [https://github.com/shiguang0116/sg-utils](https://github.com/shiguang0116/sg-utils)
 
 #### 5、文件说明
 
