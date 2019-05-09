@@ -1,4 +1,6 @@
-﻿# JavaScript通用工具类
+﻿# sg-utils
+
+> JavaScript通用工具类
 
 #### 1、使用实例
 
