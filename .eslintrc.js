@@ -20,7 +20,10 @@ module.exports = {
     jquery: true            // jQuery 全局变量
   },
   globals: {                // 定义全局变量。访问当前源文件内未定义的变量时，no-undef 规则将发出警告。如果你想在一个源文件里使用全局变量，推荐你在 ESLint 中定义这些全局变量，这样 ESLint 就不会发出警告了
-    '_util': false,         // false 不允许被重写
+    template: false,        // false 不允许被重写
+    os: false,
+    _util: false,
+    _sv: false
   },
   extends: ['eslint:recommended'],  // 一个配置文件可以从基础配置中继承已启用的规则，每个配置继承它前面的配置
 
