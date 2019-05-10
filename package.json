@@ -1,6 +1,6 @@
 {
   "name": "sg-utils",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "javascript通用工具类",
   "main": "index.js",
   "files": [

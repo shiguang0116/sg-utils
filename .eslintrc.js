@@ -155,7 +155,9 @@ module.exports = {
     'no-useless-escape': 0,                       // 禁用不必要的转义字符
     'no-whitespace-before-property': 2,           // 禁止属性前有空白
     'no-with': 2,                                 // 禁用 with 语句
-    'one-var': [2, 'consecutive'],                // 强制函数中的变量在一起声明或分开声明 always|never|consecutive
+    'one-var': [0, {                              // 强制函数中的变量在一起声明或分开声明 always|never|consecutive
+      "initialized": "never"                      // 要求每个作用域的初始化的变量有多个变量声明
+    }],
     'operator-linebreak': [2, 'before'],          // 强制操作符使用一致的换行符风格 after|before|none 和 overrides对象
     'padded-blocks': [2, 'never'],                // 禁止或要求块内填充 never|always
     'quotes': [2, 'single', {                     // 强制使用一致的反勾号、双引号或单引号
