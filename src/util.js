@@ -59,8 +59,8 @@
      * @return localStorage对象
      */
     function uzStorage() {
-        var ls = window.localStorage,
-            isAndroid = (/android/gi).test(window.navigator.appVersion)
+        var ls = window.localStorage
+        var isAndroid = (/android/gi).test(window.navigator.appVersion)
         if (isAndroid) ls = os.localStorage()
         return ls
     }
@@ -71,8 +71,8 @@
      * @param {*} value 储存的值
      */
     u.storage.set = function(key, value) {
-        var v = value,
-            ls = uzStorage()
+        var v = value
+        var ls = uzStorage()
         if (typeof v === 'object') {
             v = JSON.stringify(v)
             v = 'obj-' + v
@@ -460,9 +460,9 @@
             part1 = ''
             part2 = code
         }
-        var int = parseInt(part2),
-            zero = (part2 + '.').split(int + '.')[0],
-            newPart2 = zero + (int + 1).toString()
+        var int = parseInt(part2)
+        var zero = (part2 + '.').split(int + '.')[0]
+        var newPart2 = zero + (int + 1).toString()
         return part1 + newPart2
     }
 
@@ -582,7 +582,8 @@
      * @return {Number} 和
      */
     u.number.add = function(args) {
-        var m = 0, ret = 0
+        var m = 0
+        var ret = 0
         for (var i = 0; i < arguments.length; i++) {
             arguments[i] = arguments[i].toString()
             try {
@@ -605,7 +606,8 @@
      * @return {Number} 积
      */
     u.number.mul = function(args) {
-        var m = 0, ret = 1
+        var m = 0
+        var ret = 1
         for (var i = 0; i < arguments.length; i++) {
             arguments[i] = arguments[i].toString()
             try {
@@ -710,8 +712,8 @@
         var ret = array.concat([])
         order = order || 'asc'
         ret.sort(function(a, b) {
-            var aVal = a[sortKey],
-                bVal = b[sortKey]
+            var aVal = a[sortKey]
+            var bVal = b[sortKey]
             if (aVal > bVal) return order === 'asc' ? 1 : -1
             else if (aVal < bVal) return order === 'asc' ? -1 : 1
             return 0
@@ -757,8 +759,8 @@
     u.array.filter = function(source, filterProperty, getDeleteData) {
         if (u.isEmpty(source) || u.isEmpty(filterProperty)) return []
 
-        var ret = [],
-            retByDelete = []
+        var ret = []
+        var retByDelete = []
         u.forEach(source, function(i, item) {
             var equal = true
             u.forEach(filterProperty, function(filterKey, filterValue) {
@@ -1003,7 +1005,8 @@
      * @return {String}
      */
     u.object.serialize = function(paramObj) {
-        var name, value, fullSubName, subName, subValue, innerObj, ret = ''
+        var name, value, fullSubName, subName, subValue, innerObj
+        var ret = ''
         for (name in paramObj) {
             value = paramObj[name]
             if (value instanceof Array) {
@@ -1039,8 +1042,8 @@
     u.object.remove = function(obj, keys) {
         if (u.isEmpty(obj)) return obj
 
-        var ret = {},
-            es6 = true
+        var ret = {}
+        var es6 = true
         if (!u.isEmpty(keys)) {
             if (!u.isArray(keys)) keys = [keys]
             u.forEach(keys, function(i, key) {
@@ -1123,9 +1126,10 @@
      * @return {Array}
      */
     u.json.toTreeData = function(data, id, pid, child) {
-        var i, ret = [],
-            hash = {},
-            len = (data || []).length
+        var i
+        var ret = []
+        var hash = {}
+        var len = (data || []).length
         for (i = 0; i < len; i++) {
             hash[data[i][id]] = data[i]
         }
@@ -1304,10 +1308,10 @@
      * @return {Number}
      */
     u.date.howManyDays = function(date1, date2) {
-        var ret = '',
-            timestamp1 = Date.parse(date1),
-            timestamp2 = Date.parse(date2),
-            dateSpan = Math.abs(timestamp2 - timestamp1)
+        var ret = ''
+        var timestamp1 = Date.parse(date1)
+        var timestamp2 = Date.parse(date2)
+        var dateSpan = Math.abs(timestamp2 - timestamp1)
         ret = Math.floor(dateSpan / (24 * 3600 * 1000))
         return ret
     }
@@ -1337,7 +1341,8 @@
     u.date.getDatesBetween = function(date1, date2, format) {
         format = format || 'YYYY-MM-DD'
 
-        var start, len, ret = []
+        var start, len
+        var ret = []
         start = Date.parse(date1) < Date.parse(date2) ? date1 : date2
         // 所有天
         if (format.indexOf('DD') > -1) {
@@ -1364,8 +1369,8 @@
      * @description base64 编码
      */
     u.base64.encrypt = function(input) {
-        var str = CryptoJS.enc.Utf8.parse(input),
-            base64 = CryptoJS.enc.Base64.stringify(str)
+        var str = CryptoJS.enc.Utf8.parse(input)
+        var base64 = CryptoJS.enc.Base64.stringify(str)
         return base64
     }
 
@@ -1538,8 +1543,8 @@
      * @description 跳回到之前的页面
      */
     u.url.jumpToReferrer = function() {
-        var search = decodeURIComponent(window.location.search),
-            url = search.split('referrer=')[1]
+        var search = decodeURIComponent(window.location.search)
+        var url = search.split('referrer=')[1]
         window.location.href = url
     }
 
@@ -1615,7 +1620,8 @@
      * @param {Dom Object} oFooter  被定位元素的dom对象
      */
     u.layout.fixedFooter = function(oBody, oFooter) {
-        var sh, fh, h = 0
+        var sh, fh
+        var h = 0
         sh = document.documentElement.clientHeight // 页面对象高度（即BODY对象高度加上Margin高）
         fh = oFooter.offsetHeight
         if (u.browser.isWechat()) h = 64 // 微信浏览器要去除状态栏的高度

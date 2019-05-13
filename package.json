@@ -15,8 +15,15 @@
     "type": "git",
     "url": "https://github.com/shiguang0116/sg-utils"
   },
+  "keywords": [
+    "javascript",
+    "util"
+  ],
   "author": "guang.shi",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shiguang0116/sg-utils/issues"
+  },
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-friendly-formatter": "^4.0.1",
