@@ -1,7 +1,7 @@
 /**
  * @description: util.js 用法实例
- * @author: guang.shi <https://blog.csdn.net/guang_s> 
- * @date: 2019-03-04 12:45:43 
+ * @author: guang.shi <https://blog.csdn.net/guang_s>
+ * @date: 2019-03-04 12:45:43
  */
 
 /********************************************* cookie 缓存 ***************************************************/
@@ -13,7 +13,7 @@ _util.cookie.set('user_type', 'admin', 1/24);   // 保存一个小时
 _util.cookie.set('is_login', '1', 1/24/60);     // 保存一分钟
 
 // _util.cookie.get()
-console.group("_util.cookie.get()"); 
+console.group("_util.cookie.get()");
     console.log(_util.cookie.get('user_name'));     // guang
     console.log(_util.cookie.get('user_id'));       // 12
     console.log(_util.cookie.get('user_type'));     // admin
@@ -32,7 +32,7 @@ _util.storage.set('user', { name: 'guang', age: '25'}); // 'obj-{"name":"guang",
 _util.storage.set('lang', 'zh-cn');                     // 'zh-cn'
 
 // _util.storage.get()
-console.group("_util.storage.get()"); 
+console.group("_util.storage.get()");
     console.log(_util.storage.get('user'));     // { name: 'guang', age: '25'}
     console.log(_util.storage.get('lang'));     // 'zh-cn'
 console.groupEnd();
@@ -43,7 +43,7 @@ console.groupEnd();
 /********************************************* 数据类型 ***************************************************/
 
 // _util.isEmpty()
-console.group("_util.isEmpty()"); 
+console.group("_util.isEmpty()");
     console.log(_util.isEmpty(undefined));  // true
     console.log(_util.isEmpty(null));   // true
     console.log(_util.isEmpty(''));     // true
@@ -52,18 +52,18 @@ console.group("_util.isEmpty()");
 console.groupEnd();
 
 // _util.isString()
-console.group("_util.isString()"); 
+console.group("_util.isString()");
     console.log(_util.isString('q'));  // true
 console.groupEnd();
 
 // _util.isArray()
-console.group("_util.isArray()"); 
+console.group("_util.isArray()");
     console.log(_util.isArray('q'));    // false
     console.log(_util.isArray(['q']));  // true
 console.groupEnd();
 
 // _util.isObject()
-console.group("_util.isObject()"); 
+console.group("_util.isObject()");
     console.log(_util.isObject('q'));       // false
     console.log(_util.isObject(['q']));     // false
     console.log(_util.isObject({id:'q'}));  // true
@@ -71,7 +71,7 @@ console.groupEnd();
 
 // _util.isFunction()
 var fn = function(){};
-console.group("_util.isFunction()"); 
+console.group("_util.isFunction()");
     console.log(_util.isFunction(fn));  // true
 console.groupEnd();
 
@@ -82,21 +82,21 @@ var obj = {
 };
 var arr = ['p','o','i'];
 var str = 'yeah';
-console.group("_util.length()"); 
+console.group("_util.length()");
     console.log(_util.length(obj));     // 2
     console.log(_util.length(arr));     // 3
     console.log(_util.length(str));     // 4
 console.groupEnd();
 
 // _util.forEach()
-console.group("_util.forEach()"); 
+console.group("_util.forEach()");
 var source = [
     { id: 'c', status: '3', count: '46' },
     { id: 'd', status: '1', count: '41' }
 ];
 _util.forEach(source, function(i, item){
     console.log(i);
-    console.log(item);  
+    console.log(item);
     // 0
     // { id: 'c', status: '3', count: '46' }
     // 1
@@ -108,7 +108,7 @@ var source = {
 };
 _util.forEach(source, function(key, value){
     console.log(key);
-    console.log(value);  
+    console.log(value);
     // 'id'
     // 'c'
     // 'status'
@@ -132,28 +132,28 @@ var source3 = [
     ['q','w'],
     { id: 'b', status: '2', count: '19' },
 ];
-console.group("_util.isEqual()"); 
+console.group("_util.isEqual()");
     console.log(_util.isEqual(source1, source2));     // true
     console.log(_util.isEqual(source1, source3));     // false
 console.groupEnd();
 
 // _util.copy()
-console.group("_util.copy()"); 
+console.group("_util.copy()");
     var s1 = { id: 'a' };
     var s2 = s1;
     s2.status = '2';
     console.log(s1);    // {id: "a", status: "2"}
-    
+
     var s1 = { id: 'a' };
     var s2 = _util.copy(s1);
     s2.status = '2';
     console.log(_util.copy(s1));    // {id: "a"}
-    
+
     var s1 = [{ id: 'a' }];
     var s2 = s1;
     s2.push({ id: 'b' });
     console.log(_util.copy(s1));    // [{id: "a"}, {id: "b"}]
-    
+
     var s1 = [{ id: 'a' }];
     var s2 = _util.copy(s1);
     s2.push({ id: 'b' });
@@ -164,47 +164,47 @@ console.groupEnd();
 
 // _util.trim()
 var str = '  qwe  rty ';
-console.group("_util.trim()"); 
+console.group("_util.trim()");
     console.log(_util.trim(str));       // 'qwe  rty'
 console.groupEnd();
 
 // _util.trimAll()
-console.group("_util.trimAll()"); 
+console.group("_util.trimAll()");
     console.log(_util.trimAll(str));    // 'qwerty'
 console.groupEnd();
 
 // _util.string.format()
-console.group("_util.string.format()"); 
+console.group("_util.string.format()");
     console.log(_util.string.format('确定要{0}单据【{1}】吗？', '删除', 'QZYDYJZB201901300002'));   // '确定要删除单据【QZYDYJZB201901300002】吗？'
 console.groupEnd();
 
 // _util.string.isStartWith()
-console.group("_util.string.isStartWith()"); 
+console.group("_util.string.isStartWith()");
     console.log(_util.string.isStartWith('qwerty', 'qw'));   // true
 console.groupEnd();
 
 // _util.string.isEndWith()
-console.group("_util.string.isEndWith()"); 
+console.group("_util.string.isEndWith()");
     console.log(_util.string.isEndWith('qwerty', 'ty'));   // true
 console.groupEnd();
 
 // _util.string.firstUpperCase()
-console.group("_util.string.firstUpperCase()"); 
+console.group("_util.string.firstUpperCase()");
     console.log(_util.string.firstUpperCase('qwerty'));   // 'Qwerty'
 console.groupEnd();
 
 // _util.string.reverse()
-console.group("_util.string.reverse()"); 
+console.group("_util.string.reverse()");
     console.log(_util.string.reverse('qwerty'));   // 'ytrewq'
 console.groupEnd();
 
 // _util.string.split()
-console.group("_util.string.split()"); 
+console.group("_util.string.split()");
     console.log(_util.string.split('a,s,d', ','));   // ["a", "s", "d"]
 console.groupEnd();
 
 // _util.string.getNext()
-console.group("_util.string.getNext()"); 
+console.group("_util.string.getNext()");
     console.log(_util.string.getNext('0001'));     // '0002'
     console.log(_util.string.getNext('XM0001'));   // 'XM0002'
 console.groupEnd();
@@ -212,48 +212,48 @@ console.groupEnd();
 /********************************************* number 数字 ***************************************************/
 
 // _util.number.parseInt()
-console.group("_util.number.parseInt()"); 
+console.group("_util.number.parseInt()");
     console.log(_util.number.parseInt('25.36'));   // 25
 console.groupEnd();
 
 // _util.number.parseFloat()
-console.group("_util.number.parseFloat()"); 
+console.group("_util.number.parseFloat()");
     console.log(_util.number.parseFloat('25.36'));   // 25.36
 console.groupEnd();
 
 // _util.number.toFixed()
-console.group("_util.number.toFixed()"); 
+console.group("_util.number.toFixed()");
     console.log(_util.number.toFixed('25.3682', 2));   // '25.37'
 console.groupEnd();
 
 // _util.number.round()
-console.group("_util.number.round()"); 
+console.group("_util.number.round()");
     console.log(_util.number.round('25.3682', 2));   // 25.37
 console.groupEnd();
 
 // _util.number.ceil()
-console.group("_util.number.ceil()"); 
+console.group("_util.number.ceil()");
     console.log(_util.number.ceil('25.3612', 2));   // 25.37
 console.groupEnd();
 
 // _util.number.floor()
-console.group("_util.number.floor()"); 
+console.group("_util.number.floor()");
     console.log(_util.number.floor('25.3682', 2));   // 25.36
 console.groupEnd();
 
 // _util.number.mul()
-console.group("_util.number.mul()"); 
+console.group("_util.number.mul()");
     console.log(_util.number.mul(1.2, 2.3 ,3.45));   // 9.522
 console.groupEnd();
 
 // _util.number.add()
-console.group("_util.number.add()"); 
+console.group("_util.number.add()");
     console.log(_util.number.add(1.2, 2.3 ,3.45));   // 6.95
 console.groupEnd();
 
 // _util.number.random()
-console.group("_util.number.random()"); 
-    console.log(_util.number.random(1, 100));   // 
+console.group("_util.number.random()");
+    console.log(_util.number.random(1, 100));   //
 console.groupEnd();
 
 /********************************************* array 数组 ***************************************************/
@@ -266,12 +266,12 @@ arr = [
     ['q', 'w', 'e'],
     { id: 'a', name: '光' }
 ];
-console.group("_util.array.indexOf()"); 
+console.group("_util.array.indexOf()");
     console.log(_util.array.indexOf(arr, 'qwert'));         // 0
     console.log(_util.array.indexOf(arr, ['q', 'w', 'e'])); // 1
     console.log(_util.array.indexOf(arr, {id: 'a'}));       // 2。当检索数组中的对象时，只用匹配该对象的某一个（几个）属性即可查询到。
 console.groupEnd();
-    
+
 // _util.array.push()
 arr = ['q'];
 var len = _util.array.push(arr, ['w','e']);
@@ -287,7 +287,7 @@ arr = [
     { billNo: 'CGAPD20190301000001', date: '2019-03-01', count: '36' },
 ];
 console.group("_util.array.sort()");
-    console.log(_util.array.sort(arr, 'billNo'));   // 输出结果为：  
+    console.log(_util.array.sort(arr, 'billNo'));   // 输出结果为：
     // [
     //    { billNo: 'CGAPD20190228000001', date: '2019-02-28', count: '14' },
     //    { billNo: 'CGAPD20190301000001', date: '2019-03-01', count: '36' },
@@ -752,7 +752,7 @@ console.group("_sv.request()");
             console.log(res.data.rows);
         }
         else if(res.status === 'WARN') {
-            
+
         }
     }).catch(function(err){
         console.log(err);
