@@ -41,5 +41,5 @@ const server = http.createServer(function(req, res) {
 
 // 启动服务器监听指定端口
 server.listen(port, host, function() {
-    console.log('\x1B[36m%s\x1B[39m', `服务器运行在: \n - http://${host}:${port} \n - http://${host}:${port}${openPage}`)
+    console.log('\x1B[36m%s\x1B[0m', `服务器运行在: \n - http://${host}:${port} \n - http://${host}:${port}${openPage}`)
 })
