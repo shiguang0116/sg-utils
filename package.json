@@ -1,6 +1,6 @@
 {
   "name": "sg-utils",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "javascript通用工具类",
   "main": "index.js",
   "files": [
@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/shiguang0116/sg-utils/issues"
   },
-  "homepage": "https://github.com/shiguang0116/eslint-config-vui#readme",
+  "homepage": "https://github.com/shiguang0116/sg-utils#readme",
   "engines": {
     "node": ">= 6.0.0",
     "npm": ">= 3.0.0"

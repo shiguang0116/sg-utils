@@ -10,6 +10,8 @@ module.exports = {
         jquery: true
     },
     globals: {
+        os: false,
+        CryptoJS: false,
         _util: false,
         _sv: false
     },

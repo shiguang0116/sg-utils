@@ -195,7 +195,9 @@
         if (u.isObject(source)) {
             var len = 0
             for (var key in source) {
-                len++
+                if (Object.prototype.hasOwnProperty.call(source, key)) { // 每个对象都有一个内部属性（__proto__指向原型）
+                    len++
+                }
             }
             return len
         }
