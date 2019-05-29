@@ -5,27 +5,27 @@
  */
 
 module.exports = {
-    root: true,
-    env: {
-        jquery: true
-    },
-    globals: {
-        os: false,
-        CryptoJS: false,
-        _util: false,
-        _sv: false
-    },
-    plugins: [
-        'html' // 需要检查 *.html 文件 里的js代码
-    ],
-    // 一个配置文件可以从基础配置中继承已启用的规则，每个配置继承它前面的配置
-    extends: [
-        'eslint:recommended',
-        'vui'
-    ],
+  root: true,
+  env: {
+    jquery: true
+  },
+  globals: {
+    os: false,
+    CryptoJS: false,
+    _util: false,
+    _sv: false
+  },
+  plugins: [
+    'html' // 需要检查 *.html 文件 里的js代码
+  ],
+  // 一个配置文件可以从基础配置中继承已启用的规则，每个配置继承它前面的配置
+  extends: [
+    'eslint:recommended',
+    'vui'
+  ],
 
-    // 在此处添加自定义规则，此规则基于 https://github.com/shiguang0116/eslint-config-vui
-    rules: {
+  // 在此处添加自定义规则，此规则基于 https://github.com/shiguang0116/eslint-config-vui
+  rules: {
 
-    }
+  }
 };

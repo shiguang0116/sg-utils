@@ -7,7 +7,7 @@
 /********************************************* cookie 缓存 ***************************************************/
 
 // _util.cookie.set()
-_util.cookie.set('user_name', 'guang');         // 关闭浏览器后失效。注：单独打开 demo.html 是没法缓存的，需要启动本地服务
+_util.cookie.set('user_name', 'guang');         // 关闭浏览器后失效。注：单独打开 index.html 是没法缓存的，需要启动本地服务
 _util.cookie.set('user_id', '12', 1);           // 保存一天
 _util.cookie.set('user_type', 'admin', 1/24);   // 保存一个小时
 _util.cookie.set('is_login', '1', 1/24/60);     // 保存一分钟
@@ -747,7 +747,7 @@ console.groupEnd();
 /********************************************* request 请求 ***************************************************/
 
 console.group("_sv.request()");
-    _sv.request('./demo.json').then(function(res){
+    _sv.request('./index.json').then(function(res){
         if(res.status === 'SUCCESS'){
             console.log(res.data.rows);
         }
@@ -761,9 +761,9 @@ console.group("_sv.request()");
     });
 
     async function getJson() {
-        const demo = await _sv.request('./demo.json');
-        const demo2 = await _sv.request('./demo2.json', demo);
-        return demo2;
+        const json = await _sv.request('./index.json');
+        const json2 = await _sv.request('./index2.json', json);
+        return json2;
     }
 
     getJson().then(function (res) {

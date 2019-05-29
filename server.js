@@ -13,7 +13,7 @@ const fs = require('fs')
 // 参数配置
 const host = '127.0.0.1' // 设置主机名
 const port = 8080 // 设置端口
-const openPage = '/demo/demo.html' // 默认打开的页面
+const openPage = '/example/index.html' // 默认打开的页面
 const rootPath = path.resolve(__dirname, './') // 文件的访问路径
 
 // 创造一个服务器实例（req:客户端的HTTP请求 | res:服务器端的HTTP回应）

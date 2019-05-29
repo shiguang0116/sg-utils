@@ -26,23 +26,23 @@
         time = time ? new Date(time) : new Date();
         format = format || 'YYYY-MM-DD';
         function tf(i){ return (i < 10 ? '0' : '') + i; }
-        return format.replace(/YYYY|MM|DD|hh|mm|ss|WW/g, function(a){  
-            switch(a){  
-                case 'YYYY':  
+        return format.replace(/YYYY|MM|DD|hh|mm|ss|WW/g, function(a){
+            switch(a){
+                case 'YYYY':
                     return tf(time.getFullYear());
-                case 'MM':  
+                case 'MM':
                     return tf(time.getMonth() + 1);
-                case 'DD':  
+                case 'DD':
                     return tf(time.getDate());
-                case 'mm':  
+                case 'mm':
                     return tf(time.getMinutes());
-                case 'hh':  
+                case 'hh':
                     return tf(time.getHours());
-                case 'ss':  
+                case 'ss':
                     return tf(time.getSeconds());
-                case 'WW':  
+                case 'WW':
                     return ['日', '一', '二', '三', '四', '五', '六'][time.getDay()];
-            }  
+            }
         });
     };
 
@@ -64,9 +64,9 @@ npm i sg-utils -S
 
 ```
 sg-utils/
-├── demo/
-│   ├── demo.html       util.js用法实例文档
-│   └── demo.js         util.js的方法调用，可编辑代码，然后在demo.html控制台查看输出结果
+├── example/
+│   ├── index.html       util.js用法实例文档
+│   └── index.js         util.js的方法调用，可编辑代码，然后在index.html控制台查看输出结果
 ├── src/
 │   ├── util.js         通用工具类，引入该文件即可使用变量_util，及所有方法。建议复制到项目中以便扩展；
 │   ├── service.js      服务工具类的基本架构。可复制到项目中以便参考扩展；

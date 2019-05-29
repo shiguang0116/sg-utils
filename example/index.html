@@ -9,14 +9,14 @@
   <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
   <script src="../src/util.js"></script>
   <script src="../src/service.js"></script>
-  <script src="./demo.js"></script>
+  <script src="./index.js"></script>
 </head>
 
 <body class="stackedit">
   <div class="stackedit__html"><h2><a id="_0"></a>一、缓存方法</h2>
 <p>.</p>
 <h5><a id="_utilcookieset_2"></a>_util.cookie.set()</h5>
-<pre><code class="prism language-javascript">_util<span class="token punctuation">.</span>cookie<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token string">'user_name'</span><span class="token punctuation">,</span> <span class="token string">'guang'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">// 关闭浏览器后失效。注：单独打开 demo.html 是没法缓存的，需要启动本地服务</span>
+<pre><code class="prism language-javascript">_util<span class="token punctuation">.</span>cookie<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token string">'user_name'</span><span class="token punctuation">,</span> <span class="token string">'guang'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">// 关闭浏览器后失效。注：单独打开 index.html 是没法缓存的，需要启动本地服务</span>
 _util<span class="token punctuation">.</span>cookie<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token string">'user_id'</span><span class="token punctuation">,</span> <span class="token string">'12'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// 保存一天</span>
 _util<span class="token punctuation">.</span>cookie<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token string">'user_type'</span><span class="token punctuation">,</span> <span class="token string">'admin'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">/</span><span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 保存一个小时</span>
 _util<span class="token punctuation">.</span>cookie<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token string">'is_login'</span><span class="token punctuation">,</span> <span class="token string">'1'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">/</span><span class="token number">24</span><span class="token operator">/</span><span class="token number">60</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// 保存一分钟</span>
@@ -96,7 +96,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token punctuation">]</span><span class="token punctuation">;</span>
 _util<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>source<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> item<span class="token punctuation">)</span><span class="token punctuation">{</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 0</span>
     <span class="token comment">// { id: 'c', status: '3', count: '46' }</span>
     <span class="token comment">// 1</span>
@@ -109,7 +109,7 @@ _util<span class="token punctuation">.</span><span class="token function">forEac
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 _util<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>source<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">{</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 'id'</span>
     <span class="token comment">// 'c'</span>
     <span class="token comment">// 'status'</span>
