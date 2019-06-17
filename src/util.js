@@ -975,6 +975,22 @@
     }
 
     /**
+     * @description 修改属性名
+     * @param {Object} obj 要修改的对象
+     * @param {String} oldKey 原来的属性名
+     * @param {String} newKey 新的属性名
+     * @param {Boolean} keepOld 是否保留旧的属性，默认为false
+     */
+    u.object.rename = function(obj, oldKey, newKey, keepOld) {
+        if (u.isEmpty(obj)) return
+
+        if (obj[oldKey]) {
+            obj[newKey] = obj[oldKey]
+            if (!keepOld) u.object.remove(obj, oldKey)
+        }
+    }
+
+    /**
      * @description 获取对象的属性值（支持多层数据）
      * @param {Object} obj 对象
      * @param {String} propertyName 属性名 'data.child.name'

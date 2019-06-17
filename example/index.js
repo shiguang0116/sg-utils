@@ -483,6 +483,15 @@ console.group("_util.object.select()");
     console.log(_util.object.select(obj, ['name', 'phone'])); // {name: "guang", phone: "13566668888"}
 console.groupEnd();
 
+// _util.object.rename()
+obj = {
+    code: 'GZB'
+};
+_util.object.rename(obj, 'code', 'buyChannel.code');
+console.group("_util.object.rename()");
+    console.log(obj); // {"buyChannel.code": "GZB"}
+console.groupEnd();
+
 // _util.object.remove()
 obj = {
     name: 'guang',
