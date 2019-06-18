@@ -116,7 +116,7 @@ _util.forEach(source, function(key, value){
 });
 console.groupEnd();
 
-// _util.isEqual()
+// _util.equal()
 var source1 = [
     'qw',
     ['q','w'],
@@ -132,9 +132,9 @@ var source3 = [
     ['q','w'],
     { id: 'b', status: '2', count: '19' },
 ];
-console.group("_util.isEqual()");
-    console.log(_util.isEqual(source1, source2));     // true
-    console.log(_util.isEqual(source1, source3));     // false
+console.group("_util.equal()");
+    console.log(_util.equal(source1, source2));     // true
+    console.log(_util.equal(source1, source3));     // false
 console.groupEnd();
 
 // _util.copy()

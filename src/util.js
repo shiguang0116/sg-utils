@@ -184,26 +184,6 @@
     }
 
     /**
-     * @description 判断元素的长度
-     * @param {*} source
-     * @return
-     */
-    u.length = function(source) {
-        if (source === undefined || source === null) return 0
-        if (u.isString(source)) return source.length
-        if (u.isArray(source)) return source.length
-        if (u.isObject(source)) {
-            var len = 0
-            for (var key in source) {
-                if (Object.prototype.hasOwnProperty.call(source, key)) { // 每个对象都有一个内部属性（__proto__指向原型）
-                    len++
-                }
-            }
-            return len
-        }
-    }
-
-    /**
      * @description 遍历数组、对象
      * @param {*} source 对象或数组，（字符串也适用）
      * @param {Function} func 执行函数，function(i, item) 或 function(key, value)。执行函数返回 false 时，循环终止。
@@ -226,7 +206,7 @@
      * @param {Boolean} ignoreSort 是否忽略排序，不传则为false
      * @return {Boolean} 是否相等
      */
-    u.isEqual = function(source1, source2, ignoreCase, ignoreSort) {
+    u.equal = function(source1, source2, ignoreCase, ignoreSort) {
         u.prop_equal = true
         // 同为数组或同为对象
         if ((u.isArray(source1) && u.isArray(source2)) || (u.isObject(source1) && u.isObject(source2))) {
@@ -248,7 +228,7 @@
             }
 
             u.forEach(source1, function(ikey, item) {
-                return u.isEqual(item, source2[ikey], ignoreCase, ignoreSort)
+                return u.equal(item, source2[ikey], ignoreCase, ignoreSort)
             })
             return u.prop_equal
         }
@@ -290,6 +270,26 @@
         }
         else return source
         return ret
+    }
+
+    /**
+     * @description 判断元素的长度
+     * @param {*} source
+     * @return
+     */
+    u.length = function(source) {
+        if (source === undefined || source === null) return 0
+        if (u.isString(source)) return source.length
+        if (u.isArray(source)) return source.length
+        if (u.isObject(source)) {
+            var len = 0
+            for (var key in source) {
+                if (Object.prototype.hasOwnProperty.call(source, key)) { // 每个对象都有一个内部属性（__proto__指向原型）
+                    len++
+                }
+            }
+            return len
+        }
     }
 
     /** ****************************************** string 字符串 ***************************************************/
@@ -411,28 +411,6 @@
             newStr += str[i]
         }
         return newStr
-    }
-
-    /**
-    * @description 以指定的分割符分割字符串
-    * @param {String} source 源字符串
-    * @param {String} separator 分隔符
-    * @param {Boolean} ignoreSpaceOrEmpty 是否忽略掉空白，不传则为false
-    */
-    u.string.split = function(source, separator, ignoreSpaceOrEmpty) {
-        if (u.isEmpty(source)) return []
-
-        var items = source.split(separator)
-        if (ignoreSpaceOrEmpty) {
-            var tmp = []
-            u.forEach(items, function(i, item) {
-                item = u.trim(item)
-                if (u.isEmpty(item)) return
-                tmp.push(item)
-            })
-            items = tmp
-        }
-        return items
     }
 
     /**
@@ -658,7 +636,7 @@
                 var isHas = true
                 u.forEach(searchElement, function(searchKey, searchValue) {
                     if (item[searchKey]) {
-                        if (!u.isEqual(item[searchKey], searchValue)) {
+                        if (!u.equal(item[searchKey], searchValue)) {
                             isHas = false
                             return false
                         }
@@ -677,7 +655,7 @@
         // 子元素为数组
         if (u.isArray(searchElement)) {
             u.forEach(source, function(i, item) {
-                if (u.isEqual(item, searchElement)) {
+                if (u.equal(item, searchElement)) {
                     index = i
                     return false
                 }
@@ -754,7 +732,7 @@
     /**
      * @description 筛选出符合条件的数组，生成新的数组
      * @param {Array} source 原数组 [{}]
-     * @param {Object} filterProperty 条件对象 {status: ['1','2']}
+     * @param {Object} filterProperty 条件对象 { status: ['1','2'] }
      * @param {Boolean} getDeleteData 是否返回被过滤掉的数组，默认false
      * @return {Array} 符合条件的数据 或 不符合条件的数据
      */
@@ -1008,7 +986,7 @@
         }
         else {
             u.forEach(obj, function(key, value) {
-                if (u.isEqual(key, propertyName, ignoreCase)) {
+                if (u.equal(key, propertyName, ignoreCase)) {
                     propertyValue = value
                     return false
                 }
@@ -1625,7 +1603,7 @@
     }
     // 验证是否相等
     u.validate.equal = function(input1, input2) {
-        return u.isEqual(input1, input2)
+        return u.equal(input1, input2)
     }
 
     /** ******************************************* layout 布局 ***************************************************/
