@@ -462,7 +462,7 @@
      *
      * ceil(x)	    上舍入
      * floor(x)	    下舍入
-     * round(x)	    四舍五入
+     * round(x)	    四舍五入，把一个数字舍入为最接近的整数
      * random()	    返回 0 ~ 1 之间的随机数
      * abs(x)       返回数的绝对值
      * pow(x,y)	    返回 x 的 y 次幂
@@ -505,43 +505,38 @@
     /**
      * @description 保留几位小数（四舍五入法）
      * @param {String Number} input 输入的数
-     * @param {String Number} digits 小数位数，默认0
+     * @param {String Number} digits 小数位数，默认 2
      * @return {String}
      */
     u.number.toFixed = function(input, digits) {
+        digits = digits || 2
         input = u.number.parseFloat(input, 0)
         if (input === 0) return 0
-        return input.toFixed(digits || 0)
-    }
-
-    /**
-     * @description 保留几位小数（四舍五入法）
-     * @param {String Number} input 输入的数
-     * @param {String Number} digits 小数位数，默认0
-     * @return {Number}
-     */
-    u.number.round = function(input, digits) {
-        return Math.round(input * Math.pow(10, digits)) / Math.pow(10, digits)
+        return input.toFixed(digits)
     }
 
     /**
      * @description 保留几位小数（进一法）
      * @param {String Number} input 输入的数
-     * @param {String Number} digits 小数位数，默认0
-     * @return {Number}
+     * @param {String Number} digits 小数位数，默认 2
+     * @return {String}
      */
     u.number.ceil = function(input, digits) {
-        return Math.ceil(input * Math.pow(10, digits)) / Math.pow(10, digits)
+        digits = digits || 2
+        var num = Math.ceil(input * Math.pow(10, digits)) / Math.pow(10, digits)
+        return u.number.toFixed(num, digits)
     }
 
     /**
      * @description 保留几位小数（舍一法）
      * @param {String Number} input 输入的数
-     * @param {String Number} digits 小数位数，默认0
-     * @return {Number}
+     * @param {String Number} digits 小数位数，默认 2
+     * @return {String}
      */
     u.number.floor = function(input, digits) {
-        return Math.floor(input * Math.pow(10, digits)) / Math.pow(10, digits)
+        digits = digits || 2
+        var num = Math.floor(input * Math.pow(10, digits)) / Math.pow(10, digits)
+        return u.number.toFixed(num, digits)
     }
 
     /**
@@ -605,13 +600,15 @@
     /**
      * @description 转化成货币格式（千分位）
      * @param {Number String} num 源数据
-     * @return {Number}
+     * @param {String Number} digits 小数位数，默认不处理
+     * @return {String}
      */
-    u.number.toCurrency = function(num) {
-        num = num + ''
-        if (!num.includes('.')) num += '.'
+    u.number.toCurrency = function(input, digits) {
+        input = input + ''
+        if (digits) input = u.number.toFixed(input, digits)
+        if (input.indexOf('.') === -1) input += '.'
 
-        return num.replace(/(\d)(?=(\d{3})+\.)/g, function($1) {
+        return input.replace(/(\d)(?=(\d{3})+\.)/g, function($1) {
             return $1 + ','
         }).replace(/\.$/, '')
     }

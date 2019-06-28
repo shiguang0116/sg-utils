@@ -219,21 +219,19 @@ console.groupEnd();
 // _util.number.toFixed()
 console.group("_util.number.toFixed()");
     console.log(_util.number.toFixed('25.3682', 2));   // '25.37'
-console.groupEnd();
-
-// _util.number.round()
-console.group("_util.number.round()");
-    console.log(_util.number.round('25.3682', 2));   // 25.37
+    console.log(_util.number.toFixed('25.36', 4));   // '25.3600'
 console.groupEnd();
 
 // _util.number.ceil()
 console.group("_util.number.ceil()");
     console.log(_util.number.ceil('25.3612', 2));   // 25.37
+    console.log(_util.number.ceil('25.36', 4));   // 25.3600
 console.groupEnd();
 
 // _util.number.floor()
 console.group("_util.number.floor()");
     console.log(_util.number.floor('25.3682', 2));   // 25.36
+    console.log(_util.number.floor('25.36', 4));   // 25.3600
 console.groupEnd();
 
 // _util.number.random()
@@ -254,6 +252,7 @@ console.groupEnd();
 // _util.number.toCurrency()
 console.group("_util.number.toCurrency()");
     console.log(_util.number.toCurrency(12345678));   // 12,345,678
+    console.log(_util.number.toCurrency(1234.5678, 2));   // 12,345,678
 console.groupEnd();
 
 /********************************************* array 数组 ***************************************************/
