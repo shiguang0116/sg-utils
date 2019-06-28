@@ -602,6 +602,20 @@
         return ret
     }
 
+    /**
+     * @description 转化成货币格式（千分位）
+     * @param {Number String} num 源数据
+     * @return {Number}
+     */
+    u.number.toCurrency = function(num) {
+        num = num + ''
+        if (!num.includes('.')) num += '.'
+
+        return num.replace(/(\d)(?=(\d{3})+\.)/g, function($1) {
+            return $1 + ','
+        }).replace(/\.$/, '')
+    }
+
     /** ******************************************* array 数组 ***************************************************/
 
     /**
@@ -1569,6 +1583,7 @@
     }
     // 验证邮箱号码
     u.validate.email = function(input) {
+        // ^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$
         return /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/.test(input)
     }
     // 验证身份证号码

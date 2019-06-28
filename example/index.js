@@ -198,11 +198,6 @@ console.group("_util.string.reverse()");
     console.log(_util.string.reverse('qwerty'));   // 'ytrewq'
 console.groupEnd();
 
-// _util.string.split()
-console.group("_util.string.split()");
-    console.log(_util.string.split('a,s,d', ','));   // ["a", "s", "d"]
-console.groupEnd();
-
 // _util.string.getNext()
 console.group("_util.string.getNext()");
     console.log(_util.string.getNext('0001'));     // '0002'
@@ -241,9 +236,9 @@ console.group("_util.number.floor()");
     console.log(_util.number.floor('25.3682', 2));   // 25.36
 console.groupEnd();
 
-// _util.number.mul()
-console.group("_util.number.mul()");
-    console.log(_util.number.mul(1.2, 2.3 ,3.45));   // 9.522
+// _util.number.random()
+console.group("_util.number.random()");
+    console.log(_util.number.random(1, 100));   //
 console.groupEnd();
 
 // _util.number.add()
@@ -251,9 +246,14 @@ console.group("_util.number.add()");
     console.log(_util.number.add(1.2, 2.3 ,3.45));   // 6.95
 console.groupEnd();
 
-// _util.number.random()
-console.group("_util.number.random()");
-    console.log(_util.number.random(1, 100));   //
+// _util.number.mul()
+console.group("_util.number.mul()");
+    console.log(_util.number.mul(1.2, 2.3 ,3.45));   // 9.522
+console.groupEnd();
+
+// _util.number.toCurrency()
+console.group("_util.number.toCurrency()");
+    console.log(_util.number.toCurrency(12345678));   // 12,345,678
 console.groupEnd();
 
 /********************************************* array 数组 ***************************************************/
