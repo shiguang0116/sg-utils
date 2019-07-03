@@ -1618,6 +1618,123 @@
         return u.equal(input1, input2)
     }
 
+    /** ******************************************* event 事件工具集 ***************************************************/
+
+    u.event = {} // event(事件)工具集，来源：github.com/markyun
+
+    /**
+     * @description 页面加载完成后
+     * @param {Function} fn
+     */
+    u.event.ready = function(fn) {
+        if (fn == null) {
+            fn = document
+        }
+        var oldonload = window.onload
+        if (typeof window.onload !== 'function') {
+            window.onload = fn
+        }
+        else {
+            window.onload = function() {
+                oldonload()
+                fn()
+            }
+        }
+    }
+
+    /**
+     * @description 添加事件
+     * @param {Object} element 必需。描述事件名称的字符串。注意：不要使用 "on" 前缀。例如，使用 "click" 来取代 "onclick"。
+     * @param {String} type 必需。描述事件名称的字符串。注意：不要使用 "on" 前缀。例如，使用 "click" 来取代 "onclick"。
+     * @param {Function} handler 必需。描述了事件触发后执行的函数。
+     * @param {Boolean} useCapture 可选。true: 事件在捕获阶段执行; false(默认): 事件在冒泡阶段执行
+     */
+    u.event.add = function(element, type, handler, useCapture) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, useCapture)
+        }
+        else if (element.attachEvent) {
+            element.attachEvent('on' + type, function() {
+                handler.call(element)
+            })
+        }
+        else {
+            element['on' + type] = handler
+        }
+    }
+
+    /**
+     * @description 移除事件
+     * @param {Object} element 必需。描述事件名称的字符串。注意：不要使用 "on" 前缀。例如，使用 "click" 来取代 "onclick"。
+     * @param {String} type 必需。描述事件名称的字符串。注意：不要使用 "on" 前缀。例如，使用 "click" 来取代 "onclick"。
+     * @param {Function} handler 必需。描述了事件触发后执行的函数。
+     * @param {Boolean} useCapture 可选。true: 事件在捕获阶段执行; false(默认): 事件在冒泡阶段执行
+     */
+    u.event.remove = function(element, type, handler, useCapture) {
+        if (element.removeEventListener) {
+            element.removeEventListener(type, handler, useCapture)
+        }
+        else if (element.datachEvent) {
+            element.detachEvent('on' + type, handler)
+        }
+        else {
+            element['on' + type] = null
+        }
+    }
+
+    /**
+     * @description 阻止事件 (主要是事件冒泡，因为IE不支持事件捕获)
+     * @param {Object} ev 事件对象
+     */
+    u.event.stop = function(ev) {
+        if (ev.stopPropagation) {
+            ev.stopPropagation()
+        }
+        else {
+            ev.cancelBubble = true
+        }
+    }
+
+    /**
+     * @description 取消事件的默认行为
+     * @param {Object} ev 事件对象
+     */
+    u.event.prevent = function(ev) {
+        if (ev.preventDefault) {
+            ev.preventDefault()
+        }
+        else {
+            ev.returnValue = false
+        }
+    }
+
+    /**
+     * @description 获取事件目标
+     * @param {Object} ev 事件对象
+     */
+    u.event.target = function(ev) {
+        return ev.target || ev.srcElement
+    }
+
+    /**
+     * @description 获取event对象的引用，取到事件的所有信息，确保随时能使用event
+     * @param {Object} ev 事件对象
+     */
+    u.event.get = function(ev) {
+        ev = ev || window.event
+        if (!ev) {
+            var c = u.event.get.caller
+            while (c) {
+                ev = c.arguments[0]
+                if (ev && Event === ev.constructor) {
+                    break
+                }
+                c = c.caller
+            }
+        }
+        return ev
+    }
+
     /** ******************************************* layout 布局 ***************************************************/
 
     u.layout = {}
