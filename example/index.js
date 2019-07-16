@@ -147,17 +147,22 @@ console.group("_util.copy()");
     var s1 = { id: 'a' };
     var s2 = _util.copy(s1);
     s2.status = '2';
-    console.log(_util.copy(s1));    // {id: "a"}
+    console.log(s1);    // {id: "a"}
 
     var s1 = [{ id: 'a' }];
     var s2 = s1;
     s2.push({ id: 'b' });
-    console.log(_util.copy(s1));    // [{id: "a"}, {id: "b"}]
+    console.log(s1);    // [{id: "a"}, {id: "b"}]
 
     var s1 = [{ id: 'a' }];
     var s2 = _util.copy(s1);
     s2.push({ id: 'b' });
-    console.log(_util.copy(s1));    // [{id: "a"}]
+    console.log(s1);    // [{id: "a"}]
+console.groupEnd();
+
+// _util.extend()
+console.group("_util.extend()");
+    
 console.groupEnd();
 
 /********************************************* string 字符串 ***************************************************/

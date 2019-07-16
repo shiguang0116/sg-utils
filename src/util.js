@@ -272,6 +272,19 @@
         return ret
     }
 
+    // /**
+    //  * @description 继承
+    //  * @param {} Child 子对象
+    //  * @param {} Parent 父对象
+    //  */
+    // u.extend = function(Child, Parent) {
+    //     var F = function() {}
+    //     F.prototype = Parent.prototype
+    //     Child.prototype = new F()
+    //     Child.prototype.constructor = Child
+    //     Child.uber = Parent.prototype
+    // }
+
     /**
      * @description 判断元素的长度
      * @param {*} source
@@ -883,7 +896,6 @@
 
     /**
      * @description object 常用方法
-     *
      */
 
     u.object = {}
@@ -1368,26 +1380,6 @@
         return ret
     }
 
-    /** ****************************************** base64 **************************************************/
-
-    u.base64 = {}
-
-    /**
-     * @description base64 编码
-     */
-    u.base64.encrypt = function(input) {
-        var str = CryptoJS.enc.Utf8.parse(input)
-        var base64 = CryptoJS.enc.Base64.stringify(str)
-        return base64
-    }
-
-    /**
-     * @description base64 解码
-     */
-    u.base64.decrypt = function(input) {
-        return CryptoJS.enc.Base64.parse(input).toString(CryptoJS.enc.Utf8)
-    }
-
     /** ******************************************* browser 浏览器/手机端 ***************************************************/
 
     u.browser = {}
@@ -1505,6 +1497,31 @@
                 file[i].removeAttribute('capture')
             }
         }
+    }
+
+    /** ****************************************** base64 **************************************************/
+
+    u.base64 = {}
+
+    // base64 前缀
+    u.base64.prefix = 'data:image/png;base64,'
+
+    /**
+     * @description base64 编码
+     * @param {input}
+     */
+    u.base64.encrypt = function(input) {
+        var str = CryptoJS.enc.Utf8.parse(input)
+        var base64 = CryptoJS.enc.Base64.stringify(str)
+        return base64
+    }
+
+    /**
+     * @description base64 解码
+     * @param {input}
+     */
+    u.base64.decrypt = function(input) {
+        return CryptoJS.enc.Base64.parse(input).toString(CryptoJS.enc.Utf8)
     }
 
     /** ******************************************* url 路径处理 ***************************************************/
