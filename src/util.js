@@ -344,7 +344,7 @@
     }
 
     /**
-    * @description 格式化字符串
+    * @description 格式化字符串（文本替换）
     * @param {String} str 源字符串。如：'确定要{0}单据【{1}】吗？'
     * @param {*} args 要替换的参数。如：'删除', 'QZYDYJZB201901300002'
     * @return {String} 如：'确定要删除单据【QZYDYJZB201901300002】吗？'
@@ -412,10 +412,10 @@
     }
 
     /**
-    * @description 反转字符串的元素顺序
-    * @param {String} str 源字符串
-    * @return {String}
-    */
+     * @description 反转字符串的元素顺序
+     * @param {String} str 源字符串
+     * @return {String}
+     */
     u.string.reverse = function(str) {
         if (u.isEmpty(str)) return ''
 
