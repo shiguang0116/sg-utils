@@ -23,9 +23,9 @@
         if (expiredays) {
             var exdate = new Date()
             exdate.setTime(exdate.getTime() + expiredays * (24 * 3600 * 1000))
-            expires = ';expires=' + exdate.toUTCString()
+            expires = 'expires=' + exdate.toUTCString()
         }
-        document.cookie = name + '=' + escape(value) + expires
+        document.cookie = name + '=' + escape(value) + ';' + expires
     }
 
     /**
@@ -113,25 +113,6 @@
     }
 
     /** ****************************************** 数据类型 ***************************************************/
-
-    /**
-     * @description JavaScript 数据类型
-     *
-     * 基本类型        string number boolean null undefined
-     * 引用类型        array object function date 等
-     * 强制类型转换     parseInt() parseFloat() Number() String() Boolean()
-     *
-     * typeof       返回一个字符串 'undefined' 'boolean' 'number' 'string' 'function' 'symbol' 'object'
-     * toString()   转化为字符串
-     *
-     * @description JavaScript 全局函数
-     *
-     * isNaN()      判断元素是否为非数字，是数字则为false（包括 number 类型 和 由数字组成的 string 类型）
-     * parseInt()   解析一个字符串并返回一个整数 或 NaN
-     * parseFloat() 解析一个字符串并返回一个浮点数 或 NaN
-     * escape()	    对字符串进行编码
-     * unescape()   对字符串进行解码
-     */
 
     /**
      * @description 判断元素是否为字符串
@@ -244,7 +225,7 @@
     }
 
     /**
-     * @description 深拷贝 对象或数组
+     * @description 深拷贝（对象或数组）
      * @param {*} source 源数据
      * @return {*}
      */
@@ -306,22 +287,6 @@
     }
 
     /** ****************************************** string 字符串 ***************************************************/
-
-    /**
-     * @description string 常用方法
-     *
-     * indexOf(searchvalue, fromindex); 检索字符串。返回某个指定的字符串值在字符串中首次出现的位置，没有则返回 -1
-     * charAt(index);                   返回指定位置的字符，如果参数 index 不在 0 与 length 之间，则返回一个空字符串
-     *
-     * sub();	                把字符串显示为下标。
-     * substring(start, stop);  提取字符串中两个指定的索引号之间的字符。返回一个新的字符串，包含从 start 处到 stop-1 处的所有字符，其长度为 stop 减 start。如果没有指定length，那么返回的字符串包含从 start 到结尾的字符。（参数为非负整数）
-     * slice(start, end);       提取字符串中两个指定的索引号之间的字符。返回一个新的字符串，包含从 start 处到 stop-1 处的所有字符，其长度为 stop 减 start。（参数可谓负数，-1 表示最后一个字符）
-     *
-     * split(separator, howmany);           把字符串分割为字符串数组。返回一个字符串数组
-     * replace(regexp/substr, replacement); 在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
-     * toLowerCase();   把字符串转换为小写
-     * toUpperCase();   把字符串转换为大写
-     */
 
     u.string = {}
 
@@ -460,28 +425,6 @@
     }
 
     /** ******************************************* number 数字 ***************************************************/
-
-    /**
-     * @description number 常用属性
-     *
-     * Number.MAX_VALUE    返回Javascript中的最大数。
-     * Number.MIN_VALUE    返回Javascript中的最小数（接近 0 ，但不是负数）。
-     *
-     * @description number 常用方法
-     *
-     * toFixed(x)	    把数字转换为字符串，结果为小数点后有指定位数的数字。
-     *
-     * @description Math 对象常用方法
-     *
-     * ceil(x)	    上舍入
-     * floor(x)	    下舍入
-     * round(x)	    四舍五入，把一个数字舍入为最接近的整数
-     * random()	    返回 0 ~ 1 之间的随机数
-     * abs(x)       返回数的绝对值
-     * pow(x,y)	    返回 x 的 y 次幂
-     * max(x,y,z,...,n)	    返回 x,y,z,...,n 中的最高值
-     * min(x,y,z,...,n)	    返回 x,y,z,...,n 中的最低值
-     */
 
     u.number = {}
 
@@ -627,22 +570,6 @@
     }
 
     /** ******************************************* array 数组 ***************************************************/
-
-    /**
-     * @description array 常用方法
-     *
-     * push()	            向数组的末尾添加一个或更多元素，并返回新的长度。
-     * unshift()	        向数组的开头添加一个或更多元素，并返回新的长度。
-     * shift()	            删除并返回数组的第一个元素。
-     * pop()	            删除并返回数组的最后一个元素。
-     * splice(index,howmany,itemX)  从数组中添加或删除元素。
-     * slice(start, end)	        返回一个新的数组，包含从 start 到 end （不包括该元素）的数组中的元素。
-     * join()	                    连接数组，返回字符串。
-     * reverse()	                反转数组的元素顺序。
-     * sort(sortby)	                对数组的元素进行排序。如果不传参数则按照字符编码的顺序
-     * forEach(function(item, index){})             调用数组的每个元素，并将元素传递给回调函数。（*** 不能break）
-     * filter(function(item, index){ return *** })  返回一个新的数组，新数组中的元素是 return true 的所有元素。不会改变原始数组
-     */
 
     u.array = {}
 
@@ -856,7 +783,7 @@
     }
 
     /**
-     * @description 删除数组中 指定的元素 或 不合法的值（undefined, null, '')
+     * @description 删除数组中指定的元素或不合法的值（undefined, null, ''）
      * @param {Array} source 原数组
      * @param {*} values 被删除的元素集合，不传则删除不合法的值
      */
@@ -893,10 +820,6 @@
     }
 
     /** ******************************************* object 对象 ***************************************************/
-
-    /**
-     * @description object 常用方法
-     */
 
     u.object = {}
 
@@ -1127,13 +1050,6 @@
 
     /** ****************************************** JSON **************************************************/
 
-    /**
-     * @description JSON 常用方法
-     *
-     * JSON.parse(text[, reviver])      将数据转换为 JavaScript 对象
-     * JSON.stringify(value[, replacer[, space]])   将 JavaScript 对象转换为字符串
-     */
-
     u.json = {}
 
     /**
@@ -1166,28 +1082,6 @@
     }
 
     /** ****************************************** date 时间 **************************************************/
-
-    /**
-     * @description date 常用方法
-     *
-     * new Date(time)   ios下，time如果是时间字符串的话，只支持以 '/' 连接的时间格式，如 '2019/02/19'
-     *
-     * getFullYear()	返回年份
-     * getMonth()	    返回月份 (0 ~ 11)
-     * getDate()        返回一个月中的某一天 (1 ~ 31)
-     * getDay()	        返回一周中的某一天 (0 ~ 6)
-     * getHours()	    返回小时 (0 ~ 23)
-     * getMinutes()	    返回分钟 (0 ~ 59)
-     * getSeconds()	    返回秒数 (0 ~ 59)
-     * getTime()	    返回 1970 年 1 月 1 日至今的毫秒数
-     *
-     * setFullYear()	    设置年份（四位数字）
-     * setMonth(month, day) 设置月份 (0 ~ 11)。day 为 0 时，Date 对象为上个月的最后一天
-     * setDate()	        设置月的某一天 (1 ~ 31)
-     * setTime()            以毫秒设置 Date 对象
-     *
-     * Date.parse(dateString)   返回该字符串所表示的日期与 1970 年 1 月 1 日午夜之间相差的毫秒数
-     */
 
     u.date = {}
 
@@ -1321,7 +1215,7 @@
     }
 
     /**
-     * @description 两个时间之间相差多少天
+     * @description 两个日期之间相差多少天
      * @param {Date} date1
      * @param {Date} date2
      * @return {Number}
@@ -1336,7 +1230,7 @@
     }
 
     /**
-     * @description 两个时间之间相差多少月
+     * @description 两个日期之间相差多少月
      * @param {Date} date1
      * @param {Date} date2
      * @return {Number}
@@ -1463,13 +1357,13 @@
         else return false
     }
     /**
-     * @description 判断是否是 android
+     * @description 判断是否是android
      */
     u.browser.isAndroid = function() {
         return (/android/gi).test(navigator.appVersion)
     }
     /**
-     * @description 判断是否是 ios
+     * @description 判断是否是ios
      */
     u.browser.isIOS = function() {
         if (userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) return true
