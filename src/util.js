@@ -234,6 +234,9 @@
         if (u.isObject(source)) {
             ret = {}
             u.forEach(source, function(key, value) {
+                if (u.isObject(value) || u.isArray(value)) {
+                    value = u.copy(value)
+                }
                 ret[key] = value
             })
         }
@@ -241,35 +244,42 @@
             ret = []
             u.forEach(source, function(i, item) {
                 if (u.isObject(item) || u.isArray(item)) {
-                    var newItem = u.copy(item)
-                    ret.push(newItem)
+                    item = u.copy(item)
                 }
-                else {
-                    ret.push(item)
-                }
+                ret.push(item)
             })
         }
         else return source
         return ret
     }
 
-    // /**
-    //  * @description 继承
-    //  * @param {} Child 子对象
-    //  * @param {} Parent 父对象
-    //  */
-    // u.extend = function(Child, Parent) {
-    //     var F = function() {}
-    //     F.prototype = Parent.prototype
-    //     Child.prototype = new F()
-    //     Child.prototype.constructor = Child
-    //     Child.uber = Parent.prototype
-    // }
+    /**
+     * @description 扩展对象（深拷贝）
+     * @param {Object} target 目标对象
+     * @param arguments 后面的属性会覆盖掉前面的
+     */
+    u.extend = function(target) {
+        if (!u.isObject(target)) return
+
+        for (var i = 1; i < arguments.length; i++) {
+            var nextObj = arguments[i]
+            if (u.isObject(nextObj)) {
+                for (var key in nextObj) {
+                    var value = nextObj[key]
+                    if (u.isObject(value) || u.isArray(value)) {
+                        value = u.copy(value)
+                    }
+                    target[key] = value
+                }
+            }
+        }
+        return target
+    }
 
     /**
      * @description 判断元素的长度
      * @param {*} source
-     * @return
+     * @return {Number}
      */
     u.length = function(source) {
         if (source === undefined || source === null) return 0
@@ -831,16 +841,7 @@
     u.object.keys = function(obj) {
         if (u.isEmpty(obj)) return []
 
-        var ret = []
-        try {
-            ret = Object.keys(obj)
-        }
-        catch (e) {
-            for (var key in obj) {
-                ret.push(key)
-            }
-        }
-        return ret
+        return Object.keys(obj)
     }
 
     /**
@@ -864,19 +865,24 @@
     }
 
     /**
-     * @description 合并对象
-     * @param {Object} obj1 目标对象
-     * @param {Object} obj2 obj2 中的属性会覆盖掉 obj1
+     * @description 合并对象（ Object.assign() 拷贝的是属性值，不属于深拷贝。深拷贝请参考 u.extend() ）
+     * @param {Object} target 目标对象
+     * @param arguments 后面的属性会覆盖掉前面的
      */
-    u.object.assign = function(obj1, obj2) {
-        if (u.isEmpty(obj1) && u.isEmpty(obj2)) return {}
+    u.object.assign = function(target) {
+        if (!u.isObject(target)) return
 
         try {
-            Object.assign(obj1, obj2)
+            Object.assign.apply(window, arguments)
         }
         catch (e) {
-            for (var key in obj2) {
-                obj1[key] = obj2[key]
+            for (var i = 1; i < arguments.length; i++) {
+                var nextObj = arguments[i]
+                if (u.isObject(nextObj)) {
+                    for (var nextKey in nextObj) {
+                        target[nextKey] = nextObj[nextKey]
+                    }
+                }
             }
         }
     }
