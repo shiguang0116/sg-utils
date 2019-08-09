@@ -35,7 +35,7 @@
      */
     u.cookie.get = function(name) {
         var arr = document.cookie.split('; ')
-        for (var i = 0; i < arr.length; i++) {
+        for (var i = 0, len = arr.length; i < len; i++) {
             var temp = arr[i].split('=')
             if (temp[0] === name) return unescape(temp[1])
         }
@@ -120,7 +120,7 @@
      * @return {Boolen}
      */
     u.isString = function(source) {
-        return typeof (source) === 'string'
+        return typeof source === 'string'
     }
 
     /**
@@ -148,7 +148,7 @@
      * @return {Boolen}
      */
     u.isFunction = function(source) {
-        return typeof (source) === 'function'
+        return typeof source === 'function'
     }
 
     /**
@@ -158,24 +158,34 @@
      */
     u.isEmpty = function(source) {
         if (source === undefined || source === null) return true
-        if (u.isString(source)) return source.length === 0
-        if (u.isArray(source)) return source.length === 0
+        if (u.isString(source) || u.isArray(source)) return source.length === 0
         if (u.isObject(source)) return JSON.stringify(source) === '{}'
         else return source.toString().length === 0
     }
 
     /**
      * @description 遍历数组、对象
-     * @param {*} source 对象或数组，（字符串也适用）
+     * @param {*} source 对象或数组
      * @param {Function} func 执行函数，function(i, item) 或 function(key, value)。执行函数返回 false 时，循环终止。
      */
     u.forEach = function(source, func) {
-        if (u.isEmpty(source)) return
+        if (source === undefined || source === null) return
         if (typeof (func) !== 'function') return
-        var i = 0
-        for (var ikey in source) {
-            var flag = func.apply(window, [(typeof (source) === 'object' ? ikey : i++), source[ikey]])
-            if (flag === false) break
+
+        var flag
+        if (u.isObject(source)) {
+            for (var key in source) {
+                if (Object.prototype.hasOwnProperty.call(source, key)) {
+                    flag = func.apply(window, [key, source[key]])
+                    if (flag === false) break
+                }
+            }
+        }
+        else {
+            for (var i = 0, len = source.length; i < len; i++) {
+                flag = func.apply(window, [i, source[i]])
+                if (flag === false) break
+            }
         }
     }
 
@@ -225,7 +235,7 @@
     }
 
     /**
-     * @description 深拷贝（对象或数组）
+     * @description 复制对象或数组（深拷贝）
      * @param {*} source 源数据
      * @return {*}
      */
@@ -261,16 +271,15 @@
     u.extend = function(target) {
         if (!u.isObject(target)) return
 
-        for (var i = 1; i < arguments.length; i++) {
+        for (var i = 1, len = arguments.length; i < len; i++) {
             var nextObj = arguments[i]
             if (u.isObject(nextObj)) {
-                for (var key in nextObj) {
-                    var value = nextObj[key]
+                u.forEach(nextObj, function(key, value) {
                     if (u.isObject(value) || u.isArray(value)) {
                         value = u.copy(value)
                     }
                     target[key] = value
-                }
+                })
             }
         }
         return target
@@ -283,15 +292,12 @@
      */
     u.length = function(source) {
         if (source === undefined || source === null) return 0
-        if (u.isString(source)) return source.length
-        if (u.isArray(source)) return source.length
+        if (u.isString(source) || u.isArray(source)) return source.length
         if (u.isObject(source)) {
             var len = 0
-            for (var key in source) {
-                if (Object.prototype.hasOwnProperty.call(source, key)) { // 每个对象都有一个内部属性（__proto__指向原型）
-                    len++
-                }
-            }
+            u.forEach(source, function(key, value) {
+                len++
+            })
             return len
         }
     }
@@ -325,7 +331,7 @@
     * @return {String} 如：'确定要删除单据【QZYDYJZB201901300002】吗？'
     */
     u.string.format = function(str, args) {
-        for (var i = 1; i < arguments.length; i++) {
+        for (var i = 1, len = arguments.length; i < len; i++) {
             var reg = new RegExp('\\{' + (i - 1) + '\\}', 'gm')
             arguments[0] = arguments[0].replace(reg, arguments[i])
         }
@@ -525,7 +531,7 @@
     u.number.add = function(args) {
         var m = 0
         var ret = 0
-        for (var i = 0; i < arguments.length; i++) {
+        for (var i = 0, len = arguments.length; i < len; i++) {
             arguments[i] = arguments[i].toString()
             try {
                 m += arguments[i].split('.')[1].length
@@ -534,7 +540,7 @@
                 m += 0
             }
         }
-        for (var j = 0; j < arguments.length; j++) {
+        for (var j = 0, leng = arguments.length; j < leng; j++) {
             ret = arguments[j] * Math.pow(10, m) + ret
         }
         ret = ret / Math.pow(10, m)
@@ -549,7 +555,7 @@
     u.number.mul = function(args) {
         var m = 0
         var ret = 1
-        for (var i = 0; i < arguments.length; i++) {
+        for (var i = 0, len = arguments.length; i < len; i++) {
             arguments[i] = arguments[i].toString()
             try {
                 m += arguments[i].split('.')[1].length
@@ -636,7 +642,7 @@
      * @return {Number} 新数组的长度
      */
     u.array.push = function(target, array) {
-        if (u.isEmpty(array)) return
+        if (u.isEmpty(array)) return target
         if (!u.isArray(array)) array = [array]
         return Array.prototype.push.apply(target, array)
     }
@@ -857,9 +863,9 @@
             ret = Object.values(obj)
         }
         catch (e) {
-            for (var key in obj) {
-                ret.push(obj[key])
-            }
+            u.forEach(obj, function(key, value) {
+                ret.push(value)
+            })
         }
         return ret
     }
@@ -876,12 +882,12 @@
             Object.assign.apply(window, arguments)
         }
         catch (e) {
-            for (var i = 1; i < arguments.length; i++) {
+            for (var i = 1, len = arguments.length; i < len; i++) {
                 var nextObj = arguments[i]
                 if (u.isObject(nextObj)) {
-                    for (var nextKey in nextObj) {
-                        target[nextKey] = nextObj[nextKey]
-                    }
+                    u.forEach(nextObj, function(key, value) {
+                        target[key] = value
+                    })
                 }
             }
         }
@@ -1047,9 +1053,9 @@
             })
         }
         else {
-            for (var key in obj) {
+            u.forEach(obj, function(key, value) {
                 obj[key] = ''
-            }
+            })
         }
         return obj
     }

@@ -1,6 +1,6 @@
 {
   "name": "sg-utils",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "description": "javascript通用工具类",
   "main": "index.js",
   "files": [
@@ -29,9 +29,11 @@
     "npm": ">= 3.0.0"
   },
   "devDependencies": {
+    "body-parser": "^1.19.0",
     "eslint": "^5.16.0",
     "eslint-config-vui": "^1.0.1",
-    "eslint-plugin-html": "^5.0.5"
+    "eslint-plugin-html": "^5.0.5",
+    "express": "^4.17.1"
   },
   "dependencies": {}
 }

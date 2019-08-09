@@ -90,30 +90,42 @@ console.groupEnd()
 
 // _util.forEach()
 console.group('_util.forEach()')
-var source = [
-    { id: 'c', status: '3', count: '46' },
-    { id: 'd', status: '1', count: '41' }
-]
-_util.forEach(source, function(i, item) {
-    console.log(i)
-    console.log(item)
-    // 0
-    // { id: 'c', status: '3', count: '46' }
-    // 1
-    // { id: 'd', status: '1', count: '41' }
-})
-var source = {
-    id: 'c',
-    status: '3'
-}
-_util.forEach(source, function(key, value) {
-    console.log(key)
-    console.log(value)
-    // 'id'
-    // 'c'
-    // 'status'
-    // '3'
-})
+    var source = [
+        { id: 'a', status: '1' },
+        { id: 'b', status: '2' }
+    ]
+    source.name = '新增'
+    source.push({ id: 'c', status: '3' })
+    _util.forEach(source, function(i, item) {
+        console.log(i)
+        console.log(item)
+        // 0
+        // { id: 'a', status: '1' }
+        // 1
+        // { id: 'b', status: '2' }
+        // 2
+        // { id: 'c', status: '3' }
+    })
+
+    var source = {
+        id: 'c',
+        status: '3'
+    }
+    _util.forEach(source, function(key, value) {
+        console.log(key + ':' + value)
+        // id:c
+        // status:3
+    })
+
+    var source = 'str'
+    _util.forEach(source, function(i, value) {
+        console.log(i + ':' + value)
+        // '0':s
+        // '1':t
+        // '2':r
+    })
+
+    // abstract
 console.groupEnd()
 
 // _util.equal()
