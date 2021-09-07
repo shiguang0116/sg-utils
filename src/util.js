@@ -799,6 +799,18 @@
     }
 
     /**
+     * @description arraybuffer转string
+     * @param source 原数据
+     * @returns {string}
+     */
+     u.array.arraybufferToString = function(source) {
+      const enc = new TextDecoder("utf-8");
+      const uint8_msg = new Uint8Array(source);
+      const decodedString = enc.decode(uint8_msg)
+      return decodedString
+    }
+
+    /**
      * @description 删除数组中指定的元素或不合法的值（undefined, null, ''）
      * @param {Array} source 原数组
      * @param {*} values 被删除的元素集合，不传则删除不合法的值
@@ -1441,6 +1453,9 @@
      */
     u.url.getParams = function(name) {
         var search = window.location.search.substring(1)
+        if (!search) {
+            search = window.location.hash.split('?')[1]
+        }
         if (search) {
             var obj = JSON.parse('{"' + decodeURIComponent(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
             return name ? obj[name] : obj
@@ -1685,3 +1700,5 @@
 
     window._util = u
 })(window)
+
+// module.exports = u

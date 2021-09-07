@@ -12,7 +12,7 @@
 
     s.config = {
         // api路径
-        api_path: ''
+        api_path: 'http://127.0.0.1:54321/api/'
         // api_path : {
         //     "web": "http://192.168.149.192:7096/web/",
         //     "admin": "http://192.168.149.192:7094/admin/",

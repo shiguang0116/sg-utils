@@ -827,26 +827,28 @@ console.groupEnd()
 /********************************************* request 请求 ***************************************************/
 
 console.group('_sv.request()')
-    _sv.request('./index.json').then(function(res) {
-    if (res.status === 'SUCCESS') {
-        console.log(res.data.rows)
+
+    _sv.request('getData').then(function(res) {
+        if (res.status === 'SUCCESS') {
+            console.log(res.data.rows)
         }
-    else if (res.status === 'WARN') {
+        else if (res.status === 'WARN') {
 
-    }
-}).catch(function(err) {
-    console.log(err)
+        }
+    }).catch(function(err) {
+        console.log(err)
     }).finally(function() {
-    console.log('finally')
+        console.log('finally')
     })
 
-    async function getJson() {
-    const json = await _sv.request('./index.json')
-        const json2 = await _sv.request('./index2.json', json)
-        return json2
-    }
+    // async function getJson() {
+    //     const json = await _sv.request('getData')
+    //     const json2 = await _sv.request('getData2', json)
+    //     return json2
+    // }
 
-getJson().then(function(res) {
-    console.log(res.data.rows)
-    })
+    // getJson().then(function(res) {
+    //     console.log(res.data.rows)
+    // })
+
 console.groupEnd()
