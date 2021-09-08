@@ -937,6 +937,30 @@
             if (!keepOld) u.object.remove(obj, oldKey)
         }
     }
+    
+    /**
+     * @description 修改属性名
+     * @param {Object Array} objs 要修改的对象数组
+     * @param {String} oldKey 原来的属性名
+     * @param {String} newKey 新的属性名
+     * @param {Boolean} keepOld 是否保留旧的属性，默认为false
+     * @param {String} keyRec 子集合属性名
+     */
+    u.object.renameRecursion = function(objs, oldKey, newKey, keepOld,keyRec) {
+        if (u.isEmpty(objs)) return
+
+        for (var i in objs) {
+            var obji = objs[i];
+            if (obji[oldKey]) {
+                obji[newKey] = obji[oldKey]
+                if(obji[keyRec]){
+                    u.object.renameRecursion(obji[keyRec],oldKey,newKey,keepOld,keyRec);
+                }
+                if (!keepOld) u.object.remove(obji, oldKey)
+            }
+
+        }
+    }
 
     /**
      * @description 获取对象的属性值（支持多层数据）
