@@ -518,9 +518,24 @@
      * @return {Number}
      */
     u.number.random = function(min, max) {
-        var random = 0
-        random = min + Math.random() * (max - min)
-        return Math.round(random)
+        return Math.floor(Math.random() * (max - min + 1)) + min
+    }
+
+    /**
+     * @description 获取随机字符
+     * @param {Number} len
+     * @return {String}
+     */
+    u.number.getRandomStr = function(len) {
+        var source = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            source += 'abcdefghijklmnopqrstuvwxyz'
+            source += '1234567890_$'
+        var ret = '';
+        for (var i = 0; i < len; i++) {
+            var randomIndex = Math.floor(Math.random() * source.length);
+            ret += source[randomIndex];
+        }
+        return ret
     }
 
     /**
